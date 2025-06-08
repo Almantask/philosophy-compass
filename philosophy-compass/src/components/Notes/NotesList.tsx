@@ -1,24 +1,33 @@
 // src/components/Notes/NotesList.tsx
 import Link from "next/link";
-import styles from "./NotesList.module.css";
-import { allNotes } from "contentlayer/generated";
+import { allNotes, type Note } from "contentlayer/generated";
+import styles from "./StickyNoteList.module.css";
+import { formatDate } from "@/lib/date";
 
 export default function NotesList() {
-  const sortedNotes = allNotes.sort((a, b) => b.date.localeCompare(a.date));
+  const sortedNotes = [...allNotes].sort((a, b) => {
+    return new Date(b.date).getTime() - new Date(a.date).getTime();
+  });
 
   return (
-    <div className={styles.wrapper}>
+    <section className={styles.wrapper}>
       <h1 className={styles.title}>All Notes</h1>
-      <ul className={styles.list}>
-        {sortedNotes.map((note) => (
-          <li key={note._id} className={styles.item}>
+      <div className={styles.grid}>
+        {sortedNotes.map((note: Note, index: number) => (
+          <div
+            key={note._id}
+            className={`${styles.note} ${
+              index % 2 === 0 ? styles.rotateLeft : styles.rotateRight
+            }`}
+          >
             <Link href={`/notes/${note.slug}`} className={styles.link}>
               {note.title}
             </Link>
-            <p className={styles.date}>{note.date}</p>
-          </li>
+            <p className={styles.type}>{note.noteType}</p>
+            <p className={styles.date}>{formatDate(note.date)}</p>
+          </div>
         ))}
-      </ul>
-    </div>
+      </div>
+    </section>
   );
 }

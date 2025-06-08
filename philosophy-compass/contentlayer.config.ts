@@ -6,7 +6,13 @@ export const Note = defineDocumentType(() => ({
   contentType: "mdx",
   fields: {
     title: { type: "string", required: true },
+    noteType: {
+      type: "enum",
+      required: true,
+      options: ["philosopher", "publication", "idea"],
+    },
     date: { type: "date", required: true },
+    originYear: { type: "number", required: false },
     tags: { type: "list", of: { type: "string" } },
     coverImage: { type: "string", required: false },
   },
