@@ -65,6 +65,33 @@ export default function AnimatedCompass() {
     <div className={styles.wrapper}>
       <div className={styles.svgContainer} ref={svgRef}>
         <svg viewBox="0 0 300 300" className={styles.svg}>
+          <defs>
+            <filter
+              id="needleShadow"
+              x="-50%"
+              y="-50%"
+              width="200%"
+              height="200%"
+            >
+              <feDropShadow
+                dx="0"
+                dy="1.5"
+                stdDeviation="1.5"
+                flood-color="#000000"
+                flood-opacity="0.5"
+              />
+            </filter>
+          </defs>
+
+          <circle
+            cx="150"
+            cy="150"
+            r="100"
+            stroke="#b8aa8f"
+            strokeWidth="2"
+            fill="none"
+          />
+
           {compassPoints.map((point, i) => {
             const angle = (i * 360) / compassPoints.length;
             const radius = 100;
@@ -132,25 +159,28 @@ export default function AnimatedCompass() {
               </g>
             );
           })}
-          <circle cx="150" cy="150" r="3" className={styles.centerDot} />
 
           <g
+            transform={`rotate(${rotation ?? 0}, 150, 150)`}
             className={styles.arrow}
-            transform={`rotate(${rotation ?? 0}, 150, 150)`} // rotate around center
+            filter="url(#needleShadow)"
           >
-            {/* Shaft */}
+            {/* Main shaft */}
             <line
               x1="150"
-              y1="150"
+              y1="130"
               x2="150"
-              y2="100" // shorter than before
+              y2="170"
               stroke="#3e3a33"
-              strokeWidth="3"
+              strokeWidth="4"
               strokeLinecap="round"
             />
 
-            {/* Arrowhead */}
-            <polygon points="146,100 154,100 150,90" fill="#3e3a33" />
+            {/* Forward arrowhead (top) */}
+            <polygon points="145,130 155,130 150,115" fill="#3e3a33" />
+
+            {/* Backward arrowhead (bottom) */}
+            <polygon points="145,170 155,170 150,185" fill="#b8aa8f" />
           </g>
         </svg>
 
