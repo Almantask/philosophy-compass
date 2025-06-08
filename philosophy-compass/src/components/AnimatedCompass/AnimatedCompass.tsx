@@ -12,18 +12,21 @@ const compassPoints = [
   },
   {
     label: "Order",
-    description: "Clarity, logic & control",
+    description:
+      "I seek clarity, structure, and logical control. Guided by: rational planning, coherence, and mental discipline. Morality through: consistency, objectivity, and predictability.",
     direction: "NE",
   },
   {
-    label: "Flow",
-    description: "Goodness emerges naturally",
-    direction: "W",
+    label: "Pleasure",
+    description:
+      "I seek enjoyment, beauty, and sensory fulfillment. Guided by: desire, vitality, and appreciation of life’s pleasures. Morality through: joy, aesthetic value, and personal well-being.",
+    direction: "NW",
   },
   {
-    label: "Wholeness",
-    description: "Personal truth and alignment",
-    direction: "SE",
+    label: "Flow",
+    description:
+      "I live in harmony with the natural flow of life. Guided by: spontaneity, receptiveness, presence, and intuition. Morality through: non-coercion, inner balance, and alignment with nature.",
+    direction: "W",
   },
   {
     label: "Rationality",
@@ -33,7 +36,8 @@ const compassPoints = [
   },
   {
     label: "Depth",
-    description: "Nuance, emotion, and narrative",
+    description:
+      "I value emotional nuance, complexity, and story. Guided by: empathy, introspection, and cultural context. Morality through: emotional truth, compassion, and lived experience.",
     direction: "SW",
   },
   {
@@ -43,9 +47,10 @@ const compassPoints = [
     direction: "E",
   },
   {
-    label: "Emotion",
-    description: "Authenticity and feeling",
-    direction: "NW",
+    label: "Ambition",
+    description:
+      "I strive to grow, achieve, and leave a mark on the world. Guided by: drive, purpose, excellence, and vision. Morality through: achievement, self-realization, and contribution.",
+    direction: "SE",
   },
 ];
 
