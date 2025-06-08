@@ -1,6 +1,7 @@
+// src/app/notes/[slug]/page.tsx
 import { allNotes } from "contentlayer/generated";
-import { useMDXComponent } from "next-contentlayer2/hooks";
 import { notFound } from "next/navigation";
+import NoteBody from "@/components/Notes/NoteBody";
 
 type PageProps = {
   params: {
@@ -14,8 +15,9 @@ export async function generateStaticParams() {
   }));
 }
 
-export function generateMetadata({ params }: PageProps) {
-  const note = allNotes.find((n) => n.slug === params.slug);
+export async function generateMetadata({ params }: PageProps) {
+  const { slug } = await params; // ✅ Required for Next.js 15
+  const note = allNotes.find((n) => n.slug === slug);
   if (!note) return {};
   return {
     title: note.title,
@@ -23,16 +25,14 @@ export function generateMetadata({ params }: PageProps) {
   };
 }
 
-// Had to make it async, weird js issue. TODO: to investigate further.
 export default async function NotePage({ params }: PageProps) {
-  const note = allNotes.find((n) => n.slug === params.slug);
+  const { slug } = await params;
+  const note = allNotes.find((n) => n.slug === slug);
   if (!note) return notFound();
-
-  const MDXContent = useMDXComponent(note.body.code);
 
   return (
     <article className="prose mx-auto p-8">
-      <MDXContent />
+      <NoteBody code={note.body.code} />
     </article>
   );
 }

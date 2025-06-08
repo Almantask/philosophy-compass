@@ -1,0 +1,7 @@
+.container {
+  @apply min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-white flex items-center justify-center px-6;
+}
+
+.content {
+  @apply prose dark:prose-invert text-center;
+}
