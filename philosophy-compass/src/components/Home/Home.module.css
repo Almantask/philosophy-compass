@@ -1,7 +1,77 @@
+@import url("https://fonts.googleapis.com/css2?family=EB+Garamond&display=swap");
+
 .container {
-  @apply min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-white flex items-center justify-center px-6;
+  min-height: 100vh;
+  background-color: #fdf6e3;
+  background-image: url("/parchment-texture.jpg");
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
 }
 
-.content {
-  @apply prose dark:prose-invert text-center;
+.card {
+  max-width: 640px;
+  width: 100%;
+  background: rgba(255, 255, 240, 0.85);
+  border: 1px solid #e2d6b6;
+  border-radius: 1rem;
+  padding: 3rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.04), inset 0 0 12px #e6dcc4;
+  text-align: center;
+  font-family: "EB Garamond", serif;
+}
+
+.icon {
+  margin: 0 auto 1rem;
+}
+
+.heading {
+  font-size: 2.5rem;
+  color: #3e3a33;
+  margin-bottom: 1rem;
+}
+
+.heading span {
+  border-bottom: 2px solid #b8aa8f;
+  padding-bottom: 0.2rem;
+}
+
+.lead {
+  font-size: 1.25rem;
+  color: #4a453a;
+  margin-bottom: 2.5rem;
+}
+
+.links {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.linkItem {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  font-size: 1.125rem;
+  background-color: #fffaf0;
+  border: 1px solid #e2d6b6;
+  border-radius: 0.5rem;
+  color: #3e3a33;
+  transition: background 0.2s ease;
+  font-weight: 500;
+}
+
+.linkItem:hover {
+  background-color: #f3e9d2;
+}
+
+.iconInline {
+  width: 20px;
+  height: 20px;
+  stroke-width: 1.8;
 }

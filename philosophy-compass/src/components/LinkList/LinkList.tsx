@@ -11,7 +11,7 @@ export default function LinkList() {
       </li>
       <li>
         <Link href="/blog" className={styles.linkItem}>
-          ✍️ Thoughts & Blog
+          ✍️ Blog
         </Link>
       </li>
     </ul>
