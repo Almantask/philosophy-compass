@@ -1,0 +1,75 @@
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: -2rem; /* Moves upward */
+  margin-left: -2rem; /* Moves left */
+}
+
+.svg {
+  width: 100%;
+  height: 100%;
+}
+
+.point {
+  fill: #3e3a33;
+  cursor: pointer;
+  transition: fill 0.2s ease;
+}
+.point:hover {
+  fill: #b8aa8f;
+}
+
+.label {
+  font-size: 10px;
+  fill: #3e3a33;
+  pointer-events: none;
+  font-family: "EB Garamond", serif;
+}
+
+.svgContainer {
+  position: relative;
+  width: 360px;
+  height: 360px;
+}
+
+.tooltip {
+  position: absolute;
+  background: #fffaf0;
+  border: 1px solid #e2d6b6;
+  border-radius: 0.5rem;
+  font-size: 0.7rem;
+  padding: 0.4rem 0.6rem;
+  color: #3e3a33;
+  pointer-events: none;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+  z-index: 10;
+  max-width: 140px;
+}
+
+.tooltipTitle {
+  font-weight: 600;
+  font-size: 0.75rem;
+  margin-bottom: 0.2rem;
+}
+
+.tooltipDesc {
+  font-size: 0.65rem;
+  line-height: 1.1;
+}
+
+.centerDot {
+  fill: #3e3a33;
+}
+
+.label {
+  font-size: 11px;
+  font-weight: 600;
+  fill: #3e3a33;
+  pointer-events: none;
+  font-family: "EB Garamond", serif;
+}
+
+.arrow {
+  transition: transform 0.3s ease;
+}

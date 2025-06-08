@@ -5,16 +5,15 @@ import thinkerAnimation from "@/assets/lottie/Man-thinking.json";
 import LinkList from "../LinkList/linklist";
 import styles from "./Home.module.css";
 import { BookOpen, PenTool } from "lucide-react"; // requires lucide-react installed
+import AnimatedCompass from "@/components/AnimatedCompass/AnimatedCompass";
 
 export default function HomePage() {
   return (
     <main className={styles.container}>
       <div className={styles.card}>
-        <Lottie
-          animationData={thinkerAnimation}
-          loop
-          className={styles.statue}
-        />
+        <div className={styles.compassWrapper}>
+          <AnimatedCompass />
+        </div>
 
         <h1 className={styles.heading}>
           Welcome to <span>Philosophy Compass</span>
