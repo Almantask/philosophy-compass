@@ -6,7 +6,8 @@ import styles from "./AnimatedCompass.module.css";
 const compassPoints = [
   {
     label: "Faith",
-    description: "Trust in higher purpose",
+    description:
+      "I believe in divine order.Guided by: spirituality, purpose, destiny, trust in the unseen. Morality through: alignment with a higher good, sacredness, loyalty.",
     direction: "N",
   },
   {
@@ -15,9 +16,9 @@ const compassPoints = [
     direction: "NE",
   },
   {
-    label: "Duty",
-    description: "Justice and moral responsibility",
-    direction: "E",
+    label: "Flow",
+    description: "Goodness emerges naturally",
+    direction: "W",
   },
   {
     label: "Wholeness",
@@ -26,7 +27,8 @@ const compassPoints = [
   },
   {
     label: "Rationality",
-    description: "Skepticism and evidence",
+    description:
+      "I question everything until it earns my belief. Guided by: reason, honesty, evidence, intellectual humility. Morality through: truth-seeking, clarity, accountability.",
     direction: "S",
   },
   {
@@ -35,9 +37,10 @@ const compassPoints = [
     direction: "SW",
   },
   {
-    label: "Justice",
-    description: "Social ethics and systems",
-    direction: "W",
+    label: "Duty",
+    description:
+      "Doing the right thing matters more than how I feel. Guided by: obligation, fairness, virtue, conscience. Morality through: consistency, sacrifice, service.",
+    direction: "E",
   },
   {
     label: "Emotion",
@@ -54,6 +57,7 @@ export default function AnimatedCompass() {
   });
 
   const [rotation, setRotation] = useState<number | null>(null);
+  const [isTooHigh, setIsTooHigh] = useState(false);
 
   const svgRef = useRef<HTMLDivElement>(null);
 
@@ -96,6 +100,18 @@ export default function AnimatedCompass() {
                       const angle = Math.atan2(dy, dx) * (180 / Math.PI) + 90; // +90 to point "up"
 
                       setRotation(angle);
+
+                      const estimatedTooltipHeight = 100; // estimate or measure
+                      const isClipped =
+                        pointRect.top - estimatedTooltipHeight <
+                        containerRect.top;
+                      setIsTooHigh(isClipped);
+
+                      setTooltipPos({
+                        x: targetX,
+                        y: targetY + (isTooHigh ? 20 : -20), // place below if too high
+                      });
+
                       setTooltipPos({ x: targetX, y: targetY });
                       setHovered(point.label);
                     }
@@ -144,7 +160,7 @@ export default function AnimatedCompass() {
             style={{
               left: `${tooltipPos.x}px`,
               top: `${tooltipPos.y}px`,
-              transform: "translate(-50%, -140%)",
+              transform: `translate(-50%, ${isTooHigh ? "0" : "-75%"})`,
             }}
           >
             <div className={styles.tooltipTitle}>{hovered}</div>
