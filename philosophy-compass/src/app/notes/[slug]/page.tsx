@@ -1,7 +1,6 @@
-// src/app/notes/[slug]/page.tsx
 import { allNotes } from "contentlayer/generated";
 import { notFound } from "next/navigation";
-import NoteBody from "@/components/Notes/NoteBody";
+import NoteLayout from "@/components/Notes/NoteLayout";
 
 type PageProps = {
   params: {
@@ -16,7 +15,7 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: PageProps) {
-  const { slug } = await params; // ✅ Required for Next.js 15
+  const { slug } = await params;
   const note = allNotes.find((n) => n.slug === slug);
   if (!note) return {};
   return {
@@ -30,9 +29,5 @@ export default async function NotePage({ params }: PageProps) {
   const note = allNotes.find((n) => n.slug === slug);
   if (!note) return notFound();
 
-  return (
-    <article className="prose mx-auto p-8">
-      <NoteBody code={note.body.code} />
-    </article>
-  );
+  return <NoteLayout code={note.body.code} />;
 }
