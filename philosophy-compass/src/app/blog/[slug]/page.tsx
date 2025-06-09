@@ -1,7 +1,7 @@
 import { allBlogs } from "contentlayer/generated";
-import { useMDXComponent } from "next-contentlayer2/hooks";
 import { notFound } from "next/navigation";
 import styles from "@/components/Blog/BlogLayout.module.css";
+import BlogBody from "@/components/Blog/BlogBody";
 
 type PageProps = {
   params: {
@@ -16,8 +16,7 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: PageProps) {
-  // Await params if needed (for Next.js 14+)
-  const { slug } = params;
+  const { slug } = await params;
   const post = allBlogs.find((p) => p.slug === slug);
   if (!post) return {};
   return {
@@ -26,15 +25,14 @@ export async function generateMetadata({ params }: PageProps) {
   };
 }
 
-export default function BlogPage({ params }: PageProps) {
-  // Always call the hook
-  const post = allBlogs.find((p) => p.slug === params.slug);
-  const MDXContent = useMDXComponent(post?.body.code || "");
+export default async function BlogPage({ params }: PageProps) {
+  const { slug } = await params;
+  const post = allBlogs.find((p) => p.slug === slug);
   if (!post) return notFound();
 
   return (
     <article className={styles.blog}>
-      <MDXContent />
+      <BlogBody code={post.body.code} />
     </article>
   );
 }
