@@ -1,6 +1,7 @@
 import { allBlogs } from "contentlayer/generated";
 import { useMDXComponent } from "next-contentlayer2/hooks";
 import { notFound } from "next/navigation";
+import styles from "@/components/Blog/BlogLayout.module.css";
 
 type PageProps = {
   params: {
@@ -23,14 +24,14 @@ export function generateMetadata({ params }: PageProps) {
   };
 }
 
-export default async function BlogPage({ params }: PageProps) {
+export default function BlogPage({ params }: PageProps) {
   const post = allBlogs.find((p) => p.slug === params.slug);
   if (!post) return notFound();
 
   const MDXContent = useMDXComponent(post.body.code);
 
   return (
-    <article className="prose mx-auto p-8">
+    <article className={styles.blog}>
       <MDXContent />
     </article>
   );
