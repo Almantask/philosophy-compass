@@ -113,10 +113,10 @@ export default function AnimatedCompass() {
               return (
                 <line
                   key={angle}
-                  x1={x1}
-                  y1={y1}
-                  x2={x2}
-                  y2={y2}
+                  x1={x1.toFixed(5)}
+                  y1={y1.toFixed(5)}
+                  x2={x2.toFixed(5)}
+                  y2={y2.toFixed(5)}
                   stroke="#3e3a33"
                   strokeWidth="3"
                 />
@@ -132,10 +132,10 @@ export default function AnimatedCompass() {
               return (
                 <line
                   key={angle + "minor"}
-                  x1={x1}
-                  y1={y1}
-                  x2={x2}
-                  y2={y2}
+                  x1={x1.toFixed(5)}
+                  y1={y1.toFixed(5)}
+                  x2={x2.toFixed(5)}
+                  y2={y2.toFixed(5)}
                   stroke="#b8aa8f"
                   strokeWidth="1.5"
                 />
@@ -173,8 +173,8 @@ export default function AnimatedCompass() {
             return (
               <g key={point.label}>
                 <circle
-                  cx={x}
-                  cy={y}
+                  cx={x.toFixed(5)}
+                  cy={y.toFixed(5)}
                   r="10"
                   className={styles.point}
                   onMouseEnter={(e) => {
@@ -221,8 +221,8 @@ export default function AnimatedCompass() {
                   }}
                 />
                 <text
-                  x={labelX}
-                  y={labelY}
+                  x={labelX.toFixed(5)}
+                  y={labelY.toFixed(5)}
                   className={styles.label}
                   textAnchor="middle"
                   dominantBaseline="middle"
