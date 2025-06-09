@@ -87,8 +87,8 @@ export default function AnimatedCompass() {
                 dx="0"
                 dy="1.5"
                 stdDeviation="1.5"
-                flood-color="#000000"
-                flood-opacity="0.5"
+                floodColor="#000000"
+                floodOpacity="0.5"
               />
             </filter>
           </defs>

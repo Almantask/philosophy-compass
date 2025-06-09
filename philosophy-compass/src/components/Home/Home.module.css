@@ -3,7 +3,6 @@
 .container {
   min-height: 100vh;
   background-color: #fdf6e3;
-  background-image: url("/parchment-texture.jpg");
   background-size: cover;
   background-position: center;
   display: flex;

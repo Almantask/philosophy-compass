@@ -23,7 +23,6 @@
 
 .note {
   background-color: #fdf6e3;
-  background-image: url("/parchment-texture.jpg");
   background-size: cover;
   background-blend-mode: multiply;
   background-position: center;

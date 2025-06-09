@@ -15,8 +15,10 @@ export async function generateStaticParams() {
   }));
 }
 
-export function generateMetadata({ params }: PageProps) {
-  const post = allBlogs.find((p) => p.slug === params.slug);
+export async function generateMetadata({ params }: PageProps) {
+  // Await params if needed (for Next.js 14+)
+  const { slug } = params;
+  const post = allBlogs.find((p) => p.slug === slug);
   if (!post) return {};
   return {
     title: post.title,
@@ -25,10 +27,10 @@ export function generateMetadata({ params }: PageProps) {
 }
 
 export default function BlogPage({ params }: PageProps) {
+  // Always call the hook
   const post = allBlogs.find((p) => p.slug === params.slug);
+  const MDXContent = useMDXComponent(post?.body.code || "");
   if (!post) return notFound();
-
-  const MDXContent = useMDXComponent(post.body.code);
 
   return (
     <article className={styles.blog}>
