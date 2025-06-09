@@ -1,11 +1,9 @@
 "use client";
 
-import Lottie from "lottie-react";
-import thinkerAnimation from "@/assets/lottie/Man-thinking.json";
-import LinkList from "../LinkList/linklist";
 import styles from "./Home.module.css";
 import { BookOpen, PenTool } from "lucide-react"; // requires lucide-react installed
 import AnimatedCompass from "@/components/AnimatedCompass/AnimatedCompass";
+import Link from "next/link";
 
 export default function HomePage() {
   return (
@@ -24,14 +22,14 @@ export default function HomePage() {
         </p>
 
         <div className={styles.links}>
-          <a href="/notes" className={styles.linkItem}>
+          <Link href="/notes" className={styles.linkItem}>
             <BookOpen className={styles.iconInline} />
             Notes
-          </a>
-          <a href="/blog" className={styles.linkItem}>
+          </Link>
+          <Link href="/blog" className={styles.linkItem}>
             <PenTool className={styles.iconInline} />
             Blog
-          </a>
+          </Link>
         </div>
       </div>
     </main>
