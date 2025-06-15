@@ -3,9 +3,7 @@ import { notFound } from "next/navigation";
 import NoteLayout from "@/components/Notes/NoteLayout";
 
 type PageProps = {
-  params: {
-    slug: string;
-  };
+  params: Promise<{ slug: string }>;
 };
 
 export async function generateStaticParams() {

@@ -4,9 +4,7 @@ import styles from "@/components/Blog/BlogLayout.module.css";
 import BlogBody from "@/components/Blog/BlogBody";
 
 type PageProps = {
-  params: {
-    slug: string;
-  };
+  params: Promise<{ slug: string }>;
 };
 
 export async function generateStaticParams() {
