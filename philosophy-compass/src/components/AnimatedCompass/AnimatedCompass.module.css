@@ -80,3 +80,58 @@
 .arrow {
   transition: transform 0.3s ease;
 }
+
+/* Mobile Responsive Styles */
+@media (max-width: 768px) {
+  .wrapper {
+    margin-top: 0;
+    margin-left: 0;
+  }
+
+  .svgContainer {
+    width: 280px;
+    height: 280px;
+  }
+
+  .tooltip {
+    max-width: 280px;
+    font-size: 0.8rem;
+  }
+
+  .tooltipTitle {
+    font-size: 0.7rem;
+  }
+
+  .tooltipDesc {
+    font-size: 0.55rem;
+  }
+
+  .label {
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .svgContainer {
+    width: 240px;
+    height: 240px;
+  }
+
+  .tooltip {
+    max-width: 240px;
+    font-size: 0.75rem;
+    padding: 0.75rem;
+  }
+
+  .tooltipTitle {
+    font-size: 0.65rem;
+  }
+
+  .tooltipDesc {
+    font-size: 0.5rem;
+  }
+
+  .label {
+    font-size: 9px;
+  }
+}
