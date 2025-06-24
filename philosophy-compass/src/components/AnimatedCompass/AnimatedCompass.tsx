@@ -55,15 +55,7 @@ const compassPoints = [
 ];
 
 export default function AnimatedCompass() {
-  const [hovered, setHovered] = useState<string | null>(null);
-  const [tooltipPos, setTooltipPos] = useState<{ x: number; y: number }>({
-    x: 0,
-    y: 0,
-  });
-
   const [rotation, setRotation] = useState<number | null>(null);
-  const [isTooHigh, setIsTooHigh] = useState(false);
-
   const svgRef = useRef<HTMLDivElement>(null);
 
   return (
@@ -71,8 +63,6 @@ export default function AnimatedCompass() {
       <div className={styles.svgContainer} ref={svgRef}>
         <svg
           viewBox="0 0 440 440"
-          width="440"
-          height="440"
           className={styles.svg}
         >
           <defs>
@@ -93,23 +83,25 @@ export default function AnimatedCompass() {
             </filter>
           </defs>
 
+          {/* Main compass circle */}
           <circle
             cx="220"
             cy="220"
-            r="140"
+            r="200"
             stroke="#b8aa8f"
             strokeWidth="4"
             fill="#f8f6f2"
             filter="url(#needleShadow)"
           />
+          
           {/* Compass ring with ticks */}
           <g>
             {/* Major ticks (N, E, S, W) */}
             {[0, 90, 180, 270].map((angle) => {
-              const x1 = 220 + 130 * Math.cos((angle * Math.PI) / 180);
-              const y1 = 220 + 130 * Math.sin((angle * Math.PI) / 180);
-              const x2 = 220 + 140 * Math.cos((angle * Math.PI) / 180);
-              const y2 = 220 + 140 * Math.sin((angle * Math.PI) / 180);
+              const x1 = 220 + 185 * Math.cos((angle * Math.PI) / 180);
+              const y1 = 220 + 185 * Math.sin((angle * Math.PI) / 180);
+              const x2 = 220 + 200 * Math.cos((angle * Math.PI) / 180);
+              const y2 = 220 + 200 * Math.sin((angle * Math.PI) / 180);
               return (
                 <line
                   key={angle}
@@ -118,17 +110,17 @@ export default function AnimatedCompass() {
                   x2={x2.toFixed(5)}
                   y2={y2.toFixed(5)}
                   stroke="#3e3a33"
-                  strokeWidth="3"
+                  strokeWidth="4"
                 />
               );
             })}
             {/* Minor ticks (every 30deg) */}
             {Array.from({ length: 12 }).map((_, i) => {
               const angle = i * 30;
-              const x1 = 220 + 125 * Math.cos((angle * Math.PI) / 180);
-              const y1 = 220 + 125 * Math.sin((angle * Math.PI) / 180);
-              const x2 = 220 + 140 * Math.cos((angle * Math.PI) / 180);
-              const y2 = 220 + 140 * Math.sin((angle * Math.PI) / 180);
+              const x1 = 220 + 180 * Math.cos((angle * Math.PI) / 180);
+              const y1 = 220 + 180 * Math.sin((angle * Math.PI) / 180);
+              const x2 = 220 + 200 * Math.cos((angle * Math.PI) / 180);
+              const y2 = 220 + 200 * Math.sin((angle * Math.PI) / 180);
               return (
                 <line
                   key={angle + "minor"}
@@ -137,13 +129,13 @@ export default function AnimatedCompass() {
                   x2={x2.toFixed(5)}
                   y2={y2.toFixed(5)}
                   stroke="#b8aa8f"
-                  strokeWidth="1.5"
+                  strokeWidth="2"
                 />
               );
             })}
           </g>
-          {/* Cardinal direction labels (already present in compassPoints) */}
 
+          {/* Philosophy labels inside the compass */}
           {compassPoints.map((point) => {
             // Map direction to angle
             const directionAngles: Record<string, number> = {
@@ -160,78 +152,39 @@ export default function AnimatedCompass() {
               directionAngles[
                 point.direction as keyof typeof directionAngles
               ] ?? 0;
-            const radius = 140;
-            let labelRadius = 180;
-            if (point.direction === "S") labelRadius = 185;
-            const x = 220 + radius * Math.cos((angle * Math.PI) / 180);
-            const y = 220 + radius * Math.sin((angle * Math.PI) / 180);
-            const labelX =
-              220 + labelRadius * Math.cos((angle * Math.PI) / 180);
-            const labelY =
-              220 + labelRadius * Math.sin((angle * Math.PI) / 180);
+            
+            // Place labels inside the compass at different radii for better spacing
+            const labelRadius = 140;
+            const labelX = 220 + labelRadius * Math.cos((angle * Math.PI) / 180);
+            const labelY = 220 + labelRadius * Math.sin((angle * Math.PI) / 180);
+
+            // Create clickable areas
+            const clickRadius = 200;
+            const clickX = 220 + clickRadius * Math.cos((angle * Math.PI) / 180);
+            const clickY = 220 + clickRadius * Math.sin((angle * Math.PI) / 180);
 
             return (
               <g key={point.label}>
+                {/* Clickable area */}
                 <circle
-                  cx={x.toFixed(5)}
-                  cy={y.toFixed(5)}
-                  r="10"
+                  cx={clickX.toFixed(5)}
+                  cy={clickY.toFixed(5)}
+                  r="15"
                   className={styles.point}
-                  onMouseEnter={(e) => {
-                    const pointRect = e.currentTarget.getBoundingClientRect();
-                    const containerRect =
-                      svgRef.current?.getBoundingClientRect();
-
-                    if (containerRect) {
-                      const centerX = containerRect.width / 2;
-                      const centerY = containerRect.height / 2;
-                      const targetX =
-                        pointRect.left -
-                        containerRect.left +
-                        pointRect.width / 2;
-                      const targetY =
-                        pointRect.top -
-                        containerRect.top +
-                        pointRect.height / 2;
-
-                      const dx = targetX - centerX;
-                      const dy = targetY - centerY;
-                      const angle = Math.atan2(dy, dx) * (180 / Math.PI) + 90; // +90 to point "up"
-
-                      setRotation(angle);
-
-                      const estimatedTooltipHeight = 100; // estimate or measure
-                      const isClipped =
-                        pointRect.top - estimatedTooltipHeight <
-                        containerRect.top;
-                      setIsTooHigh(isClipped);
-
-                      setTooltipPos({
-                        x: targetX,
-                        y: targetY + (isTooHigh ? 20 : -20), // place below if too high
-                      });
-
-                      setTooltipPos({ x: targetX, y: targetY });
-                      setHovered(point.label);
-                    }
-                  }}
-                  onMouseLeave={() => {
-                    setHovered(null);
-                    // or assign to user defaults
+                  onClick={() => {
+                    const dx = clickX - 220;
+                    const dy = clickY - 220;
+                    const targetAngle = Math.atan2(dy, dx) * (180 / Math.PI) + 90;
+                    setRotation(targetAngle);
                   }}
                 />
+                {/* Label text inside compass */}
                 <text
                   x={labelX.toFixed(5)}
                   y={labelY.toFixed(5)}
                   className={styles.label}
                   textAnchor="middle"
                   dominantBaseline="middle"
-                  style={{
-                    fontWeight: 600,
-                    fontSize: "1.1rem",
-                    pointerEvents: "none",
-                    userSelect: "none",
-                  }}
                 >
                   {point.label}
                 </text>
@@ -239,42 +192,27 @@ export default function AnimatedCompass() {
             );
           })}
 
+          {/* Compass needle */}
           <g
             transform={`rotate(${rotation ?? 0}, 220, 220)`}
             className={styles.arrow}
             filter="url(#needleShadow)"
           >
             {/* North (red) needle */}
-            <polygon points="220,120 226,220 214,220" fill="#d32f2f" />
+            <polygon points="220,60 230,220 210,220" fill="#d32f2f" />
             {/* South (gray/white) needle */}
-            <polygon points="220,320 226,220 214,220" fill="#b8aa8f" />
+            <polygon points="220,380 230,220 210,220" fill="#b8aa8f" />
             {/* Center circle */}
             <circle
               cx="220"
               cy="220"
-              r="7"
+              r="10"
               fill="#fff"
               stroke="#3e3a33"
-              strokeWidth="2"
+              strokeWidth="3"
             />
           </g>
         </svg>
-
-        {hovered && (
-          <div
-            className={styles.tooltip}
-            style={{
-              left: `${tooltipPos.x}px`,
-              top: `${tooltipPos.y}px`,
-              transform: `translate(-50%, ${isTooHigh ? "0" : "-75%"})`,
-            }}
-          >
-            <div className={styles.tooltipTitle}>{hovered}</div>
-            <div className={styles.tooltipDesc}>
-              {compassPoints.find((p) => p.label === hovered)?.description}
-            </div>
-          </div>
-        )}
       </div>
     </div>
   );

@@ -2,8 +2,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: -2rem; /* Moves upward */
-  margin-left: -2rem; /* Moves left */
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  overflow: visible;
 }
 
 .svg {
@@ -12,69 +14,34 @@
 }
 
 .point {
-  fill: #3e3a33;
+  fill: transparent;
   cursor: pointer;
   transition: fill 0.2s ease;
+  stroke: none;
 }
 .point:hover {
-  fill: #b8aa8f;
-}
-
-.label {
-  font-size: 10px;
-  fill: #3e3a33;
-  pointer-events: none;
-  font-family: "EB Garamond", serif;
+  fill: rgba(184, 170, 143, 0.3);
 }
 
 .svgContainer {
   position: relative;
-  width: 360px;
-  height: 360px;
-}
-
-.tooltip {
-  position: absolute;
-  background: #fffaf0;
-  border: 1px solid #e2d6b6;
-  border-radius: 0.75rem;
-  padding: 1rem;
-  color: #3e3a33;
-  pointer-events: none;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
-  z-index: 10;
-
-  max-width: 360px;
-  width: max-content;
-
-  word-wrap: break-word;
-  white-space: normal;
-  text-align: left;
-  line-height: 1.45;
-  font-size: 0.85rem;
-}
-
-.tooltipTitle {
-  font-weight: 600;
-  font-size: 0.75rem;
-  margin-bottom: 0.3rem;
-}
-
-.tooltipDesc {
-  font-size: 0.6rem;
-  line-height: 1.3;
-}
-
-.centerDot {
-  fill: #3e3a33;
+  width: min(85vmin, 90vw);
+  height: min(85vmin, 90vw);
+  max-width: 90vw;
+  max-height: 70vh;
 }
 
 .label {
-  font-size: 11px;
+  font-size: clamp(12px, 2vw, 18px);
   font-weight: 600;
   fill: #3e3a33;
   pointer-events: none;
   font-family: "EB Garamond", serif;
+  user-select: none;
+}
+
+.centerDot {
+  fill: #3e3a33;
 }
 
 .arrow {
