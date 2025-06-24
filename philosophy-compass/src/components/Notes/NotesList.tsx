@@ -63,9 +63,13 @@ export default function NotesList() {
             </Link>
             <div className={styles.tags}>
               {note.tags?.map((tag) => (
-                <span key={tag} className={styles.tag}>
+                <button
+                  key={tag}
+                  className={styles.tag}
+                  onClick={() => handleTagClick(tag)}
+                >
                   {tag}
-                </span>
+                </button>
               ))}
             </div>
           </div>
