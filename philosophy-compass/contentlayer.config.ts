@@ -15,6 +15,7 @@ export const Note = defineDocumentType(() => ({
     originYear: { type: "number", required: false },
     tags: { type: "list", of: { type: "string" } },
     coverImage: { type: "string", required: false },
+    summary: { type: "string", required: false },
   },
   computedFields: {
     slug: {
@@ -33,6 +34,7 @@ export const Blog = defineDocumentType(() => ({
     date: { type: "date", required: true },
     summary: { type: "string", required: true },
     tags: { type: "list", of: { type: "string" } },
+    coverImage: { type: "string", required: false },
   },
   computedFields: {
     slug: {

@@ -14,7 +14,12 @@ export default function NotesList() {
   useEffect(() => {
     const tagsParam = searchParams.get("tags");
     if (tagsParam) {
-      setSelectedTags(tagsParam.split(","));
+      const decodedTags = tagsParam
+        .split(",")
+        .map((tag) => decodeURIComponent(tag.trim()));
+      setSelectedTags(decodedTags);
+    } else {
+      setSelectedTags([]); // Reset tags if no tags are in the URL
     }
   }, [searchParams]);
 
@@ -29,7 +34,7 @@ export default function NotesList() {
   const filteredNotes =
     selectedTags.length > 0
       ? sortedNotes.filter((note) =>
-          selectedTags.every((tag) => note.tags && note.tags.includes(tag))
+          selectedTags.some((tag) => note.tags && note.tags.includes(tag))
         )
       : sortedNotes;
 

@@ -35,7 +35,9 @@ export default async function CompassPage({ params }: PageProps) {
       <Link
         href={`/notes?tags=${encodeURIComponent((compass.tags ?? []).join(","))}`}
       >
-        <div className={styles.tags}>{(compass.tags ?? []).join(", ")}</div>
+        <div className={`${styles.tags} ${styles.tagButton}`}>
+          {(compass.tags ?? []).join(" | ")}
+        </div>
       </Link>
     </article>
   );
