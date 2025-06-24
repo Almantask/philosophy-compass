@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import styles from "./AnimatedCompass.module.css";
 
@@ -81,10 +81,40 @@ const compassPoints = [
 
 export default function AnimatedCompass() {
 	const [rotation, setRotation] = useState<number | null>(null);
+	const [isHovered, setIsHovered] = useState(false);
 	const svgRef = useRef<HTMLDivElement>(null);
 
+	// Function to generate a random angle
+	const getRandomAngle = () => Math.floor(Math.random() * 360);
+
+	useEffect(() => {
+		if (!isHovered) {
+			const interval = setInterval(() => {
+				setRotation(getRandomAngle());
+			}, 2000); // Change direction every 2 seconds
+			return () => clearInterval(interval);
+		}
+	}, [isHovered]);
+
+	const handleMouseMove = (event: React.MouseEvent) => {
+		if (svgRef.current) {
+			const rect = svgRef.current.getBoundingClientRect();
+			const centerX = rect.left + rect.width / 2;
+			const centerY = rect.top + rect.height / 2;
+			const dx = event.clientX - centerX;
+			const dy = event.clientY - centerY;
+			const angle = Math.atan2(dy, dx) * (180 / Math.PI) + 90;
+			setRotation(angle);
+		}
+	};
+
 	return (
-		<div className={styles.wrapper}>
+		<div
+			className={styles.wrapper}
+			onMouseEnter={() => setIsHovered(true)}
+			onMouseLeave={() => setIsHovered(false)}
+			onMouseMove={handleMouseMove}
+		>
 			<div className={styles.svgContainer} ref={svgRef}>
 				<svg viewBox="0 0 440 440" className={styles.svg}>
 					<defs>
