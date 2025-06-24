@@ -45,7 +45,9 @@
 }
 
 .arrow {
-  transition: transform 0.3s ease;
+  transition: transform 0.6s cubic-bezier(0.4, 0.0, 0.2, 1);
+  transform-origin: 220px 220px;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
 }
 
 /* Mobile Responsive Styles */
@@ -56,49 +58,28 @@
   }
 
   .svgContainer {
-    width: 280px;
-    height: 280px;
-  }
-
-  .tooltip {
-    max-width: 280px;
-    font-size: 0.8rem;
-  }
-
-  .tooltipTitle {
-    font-size: 0.7rem;
-  }
-
-  .tooltipDesc {
-    font-size: 0.55rem;
+    /* Keep the same proportional sizing as desktop */
+    width: min(85vmin, 90vw);
+    height: min(85vmin, 90vw);
+    max-width: 90vw;
+    max-height: 70vh;
   }
 
   .label {
-    font-size: 10px;
+    font-size: clamp(10px, 2vw, 16px);
   }
 }
 
 @media (max-width: 480px) {
   .svgContainer {
-    width: 240px;
-    height: 240px;
-  }
-
-  .tooltip {
-    max-width: 240px;
-    font-size: 0.75rem;
-    padding: 0.75rem;
-  }
-
-  .tooltipTitle {
-    font-size: 0.65rem;
-  }
-
-  .tooltipDesc {
-    font-size: 0.5rem;
+    /* Keep the same proportional sizing as desktop */
+    width: min(85vmin, 90vw);
+    height: min(85vmin, 90vw);
+    max-width: 90vw;
+    max-height: 70vh;
   }
 
   .label {
-    font-size: 9px;
+    font-size: clamp(9px, 2.2vw, 14px);
   }
 }

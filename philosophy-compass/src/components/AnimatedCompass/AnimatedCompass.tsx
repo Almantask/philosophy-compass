@@ -78,7 +78,6 @@ const compassPoints = [
   },
 ];
 
-
 export default function AnimatedCompass() {
   const [rotation, setRotation] = useState<number | null>(null);
   const svgRef = useRef<HTMLDivElement>(null);
@@ -86,10 +85,7 @@ export default function AnimatedCompass() {
   return (
     <div className={styles.wrapper}>
       <div className={styles.svgContainer} ref={svgRef}>
-        <svg
-          viewBox="0 0 440 440"
-          className={styles.svg}
-        >
+        <svg viewBox="0 0 440 440" className={styles.svg}>
           <defs>
             <filter
               id="needleShadow"
@@ -118,7 +114,7 @@ export default function AnimatedCompass() {
             fill="#f8f6f2"
             filter="url(#needleShadow)"
           />
-          
+
           {/* Compass ring with ticks */}
           <g>
             {/* Major ticks (N, E, S, W) */}
@@ -157,7 +153,8 @@ export default function AnimatedCompass() {
                   strokeWidth="2"
                 />
               );
-            })}          </g>
+            })}
+          </g>
 
           {/* Philosophy labels inside the compass */}
           {compassPoints.map((point) => {
@@ -175,14 +172,18 @@ export default function AnimatedCompass() {
               SW: 270,
               W: 300,
               NW: 330,
-            };            const angle =
+            };
+            const angle =
               directionAngles[
                 point.direction as keyof typeof directionAngles
               ] ?? 0;
-            
+
             // Place labels inside the compass at different radii for better spacing
             // Faith and Rationality get special positioning closer to edge
-            const labelRadius = (point.label === "Faith" || point.label === "Rationality") ? 160 : 140;
+            const labelRadius =
+              point.label === "Faith" || point.label === "Rationality"
+                ? 160
+                : 140;
             const labelX = 220 + labelRadius * Math.cos((angle * Math.PI) / 180);
             const labelY = 220 + labelRadius * Math.sin((angle * Math.PI) / 180);
 
@@ -218,17 +219,30 @@ export default function AnimatedCompass() {
                 </text>
               </g>
             );
-          })}{/* Compass needle */}
-          <g
-            transform={`rotate(${rotation ?? 0}, 220, 220)`}
-            className={styles.arrow}
-            filter="url(#needleShadow)"
-          >
-            {/* North (red) needle */}
-            <polygon points="220,160 225,220 215,220" fill="#d32f2f" />
-            {/* South (gray/white) needle */}
-            <polygon points="220,280 225,220 215,220" fill="#b8aa8f" />
-            {/* Center circle */}
+          })}
+          {/* Compass needle - stays centered, only rotates in place */}
+          <g>
+            {/* Rotating part */}
+            <g
+              className={styles.arrow}
+              style={{ transform: `rotate(${rotation ?? 0}deg)` }}
+            >
+              {/* North (red) needle - points upward from center */}
+              <polygon
+                points="220,120 227,215 220,220 213,215"
+                fill="#d32f2f"
+                stroke="#b71c1c"
+                strokeWidth="1"
+              />
+              {/* South (gray/white) needle - points downward from center */}
+              <polygon
+                points="220,320 227,225 220,220 213,225"
+                fill="#b8aa8f"
+                stroke="#8d6e63"
+                strokeWidth="1"
+              />
+            </g>
+            {/* Center circle - always stays in the same position */}
             <circle
               cx="220"
               cy="220"
