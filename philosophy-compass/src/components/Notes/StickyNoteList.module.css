@@ -78,3 +78,48 @@
   margin-top: 0.5rem;
   margin-bottom: 0.25rem;
 }
+
+.tagContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-bottom: 2.5rem;
+}
+
+.tagButton {
+  font-family: "EB Garamond", serif;
+  font-size: 1rem;
+  background-color: #f2e9d4;
+  color: #5a4e3a;
+  border: 1px solid #e2d6b6;
+  border-radius: 1rem;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.tagButton:hover {
+  background-color: #e2d6b6;
+}
+
+.activeTag {
+  background-color: #3e3a33;
+  color: #fdf6e3;
+  border-color: #3e3a33;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.tag {
+  font-size: 0.8rem;
+  background-color: #e2d6b6;
+  color: #5a4e3a;
+  border-radius: 0.75rem;
+  padding: 0.25rem 0.75rem;
+}

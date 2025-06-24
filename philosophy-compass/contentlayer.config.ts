@@ -2,7 +2,7 @@ import { defineDocumentType, makeSource } from "contentlayer2/source-files";
 
 export const Note = defineDocumentType(() => ({
   name: "Note",
-  filePathPattern: `notes/*.mdx`,
+  filePathPattern: `notes/**/*.mdx`,
   contentType: "mdx",
   fields: {
     title: { type: "string", required: true },
@@ -19,25 +19,24 @@ export const Note = defineDocumentType(() => ({
   computedFields: {
     slug: {
       type: "string",
-      resolve: (doc) => doc._raw.flattenedPath.replace(/^notes\//, ""),
+      resolve: (doc) => doc._raw.flattenedPath.replace("notes/", ""),
     },
   },
 }));
 
 export const Blog = defineDocumentType(() => ({
   name: "Blog",
-  filePathPattern: `blog/*.mdx`,
+  filePathPattern: `blog/**/*.mdx`,
   contentType: "mdx",
   fields: {
     title: { type: "string", required: true },
     date: { type: "date", required: true },
-    tags: { type: "list", of: { type: "string" } },
-    coverImage: { type: "string", required: false },
+    summary: { type: "string", required: true },
   },
   computedFields: {
     slug: {
       type: "string",
-      resolve: (doc) => doc._raw.flattenedPath.replace(/^blog\//, ""),
+      resolve: (doc) => doc._raw.flattenedPath.replace("blog/", ""),
     },
   },
 }));
