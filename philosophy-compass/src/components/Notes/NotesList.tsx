@@ -4,10 +4,18 @@
 import Link from "next/link";
 import { allNotes, type Note } from "contentlayer/generated";
 import styles from "./StickyNoteList.module.css";
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 
-export default function NotesList() {
+export default function NotesListWrapper() {
+  return (
+    <Suspense fallback={<div>Loading notes...</div>}>
+      <NotesList />
+    </Suspense>
+  );
+}
+
+function NotesList() {
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const searchParams = useSearchParams();
 
