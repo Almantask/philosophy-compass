@@ -50,3 +50,28 @@
 .compass ul li {
   margin-bottom: 0.5rem;
 }
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.tagButton {
+  font-size: 0.8rem;
+  background-color: #e2d6b6;
+  color: #5a4e3a;
+  border-radius: 0.75rem;
+  padding: 0.25rem 0.75rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.tagButton:hover {
+  background-color: #c4b499;
+  color: #3e3a33;
+}
