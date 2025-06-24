@@ -42,7 +42,25 @@ export const Blog = defineDocumentType(() => ({
   },
 }));
 
+// Added Compass document type
+export const Compass = defineDocumentType(() => ({
+  name: "Compass",
+  filePathPattern: `compass/**/*.mdx`,
+  contentType: "mdx",
+  fields: {
+    title: { type: "string", required: true },
+    description: { type: "string", required: true },
+    tags: { type: "list", of: { type: "string" } },
+  },
+  computedFields: {
+    slug: {
+      type: "string",
+      resolve: (doc) => doc._raw.flattenedPath.replace("compass/", ""),
+    },
+  },
+}));
+
 export default makeSource({
   contentDirPath: "src/content",
-  documentTypes: [Note, Blog],
+  documentTypes: [Note, Blog, Compass],
 });

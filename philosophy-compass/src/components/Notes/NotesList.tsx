@@ -4,10 +4,19 @@
 import Link from "next/link";
 import { allNotes, type Note } from "contentlayer/generated";
 import styles from "./StickyNoteList.module.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSearchParams } from "next/navigation";
 
 export default function NotesList() {
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
+  const searchParams = useSearchParams();
+
+  useEffect(() => {
+    const tagsParam = searchParams.get("tags");
+    if (tagsParam) {
+      setSelectedTags(tagsParam.split(","));
+    }
+  }, [searchParams]);
 
   const allTags = Array.from(
     new Set(allNotes.flatMap((note) => note.tags || []))
