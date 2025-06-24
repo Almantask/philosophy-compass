@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { allBlogs, type Blog } from "contentlayer/generated";
+import { allBlogs } from "contentlayer/generated";
 import styles from "./BlogList.module.css";
 import { formatDate } from "@/lib/date";
 import { useState } from "react";
