@@ -7,11 +7,13 @@ const compassPoints = [
   {
     label: "Faith",
     description:
-      "I believe in divine order.Guided by: spirituality, purpose, destiny, trust in the unseen. Morality through: alignment with a higher good, sacredness, loyalty.",    direction: "ENE",
+      "I believe in divine order. Guided by: spirituality, purpose, destiny, trust in the unseen. Morality through: alignment with a higher good, sacredness, loyalty.",
+    direction: "ENE",
   },
   {
-    label: "Placeholder 2",
-    description: "A placeholder for future philosophical direction.",
+    label: "Tradition",
+    description:
+      "I inherit and uphold systems of meaning shaped over time. Guided by: heritage, continuity, cultural memory, and collective wisdom. Morality through: stewardship, respect for legacy, and social cohesion.",
     direction: "E",
   },
   {
@@ -23,11 +25,13 @@ const compassPoints = [
   {
     label: "Pleasure",
     description:
-      "I seek enjoyment, beauty, and sensory fulfillment. Guided by: desire, vitality, and appreciation of life’s pleasures. Morality through: joy, aesthetic value, and personal well-being.",    direction: "SE",
+      "I seek enjoyment, beauty, and sensory fulfillment. Guided by: desire, vitality, and appreciation of life’s pleasures. Morality through: joy, aesthetic value, and personal well-being.",
+    direction: "SE",
   },
   {
-    label: "Placeholder 3",
-    description: "A placeholder for future philosophical direction.",
+    label: "Love",
+    description:
+      "I open myself to connection, compassion, and care. Guided by: empathy, vulnerability, and mutual devotion. Morality through: relationship, generosity, and emotional presence.",
     direction: "SSE",
   },
   {
@@ -39,11 +43,13 @@ const compassPoints = [
   {
     label: "Rationality",
     description:
-      "I question everything until it earns my belief. Guided by: reason, honesty, evidence, intellectual humility. Morality through: truth-seeking, clarity, accountability.",    direction: "SW",
+      "I question everything until it earns my belief. Guided by: reason, honesty, evidence, intellectual humility. Morality through: truth-seeking, clarity, accountability.",
+    direction: "SW",
   },
   {
-    label: "Placeholder 4",
-    description: "A placeholder for future philosophical direction.",
+    label: "Wisdom",
+    description:
+      "I synthesize knowledge, experience, and discernment to guide life. Guided by: reflection, balance, maturity, and understanding. Morality through: prudence, integration of head and heart, long-term perspective.",
     direction: "W",
   },
   {
@@ -56,10 +62,12 @@ const compassPoints = [
     label: "Duty",
     description:
       "Doing the right thing matters more than how I feel. Guided by: obligation, fairness, virtue, conscience. Morality through: consistency, sacrifice, service.",
-    direction: "N",  },
+    direction: "N",
+  },
   {
-    label: "Placeholder 1",
-    description: "A placeholder for future philosophical direction.",
+    label: "Honor",
+    description:
+      "I hold myself to a noble standard in both duty and aspiration. Guided by: integrity, reputation, self-respect, and responsibility. Morality through: principled ambition, ethical striving, and earned dignity.",
     direction: "NNE",
   },
   {
@@ -69,6 +77,7 @@ const compassPoints = [
     direction: "NE",
   },
 ];
+
 
 export default function AnimatedCompass() {
   const [rotation, setRotation] = useState<number | null>(null);
