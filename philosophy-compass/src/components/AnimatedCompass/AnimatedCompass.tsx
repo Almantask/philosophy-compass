@@ -7,31 +7,43 @@ const compassPoints = [
   {
     label: "Faith",
     description:
-      "I believe in divine order.Guided by: spirituality, purpose, destiny, trust in the unseen. Morality through: alignment with a higher good, sacredness, loyalty.",
+      "I believe in divine order.Guided by: spirituality, purpose, destiny, trust in the unseen. Morality through: alignment with a higher good, sacredness, loyalty.",    direction: "ENE",
+  },
+  {
+    label: "Placeholder 2",
+    description: "A placeholder for future philosophical direction.",
     direction: "E",
   },
   {
     label: "Order",
     description:
       "I seek clarity, structure, and logical control. Guided by: rational planning, coherence, and mental discipline. Morality through: consistency, objectivity, and predictability.",
-    direction: "SE",
+    direction: "ESE",
   },
   {
     label: "Pleasure",
     description:
-      "I seek enjoyment, beauty, and sensory fulfillment. Guided by: desire, vitality, and appreciation of life’s pleasures. Morality through: joy, aesthetic value, and personal well-being.",
-    direction: "S",
+      "I seek enjoyment, beauty, and sensory fulfillment. Guided by: desire, vitality, and appreciation of life’s pleasures. Morality through: joy, aesthetic value, and personal well-being.",    direction: "SE",
+  },
+  {
+    label: "Placeholder 3",
+    description: "A placeholder for future philosophical direction.",
+    direction: "SSE",
   },
   {
     label: "Flow",
     description:
       "I live in harmony with the natural flow of life. Guided by: spontaneity, receptiveness, presence, and intuition. Morality through: non-coercion, inner balance, and alignment with nature.",
-    direction: "SW",
+    direction: "S",
   },
   {
     label: "Rationality",
     description:
-      "I question everything until it earns my belief. Guided by: reason, honesty, evidence, intellectual humility. Morality through: truth-seeking, clarity, accountability.",
+      "I question everything until it earns my belief. Guided by: reason, honesty, evidence, intellectual humility. Morality through: truth-seeking, clarity, accountability.",    direction: "SW",
+  },
+  {
+    label: "Placeholder 4",
+    description: "A placeholder for future philosophical direction.",
     direction: "W",
   },
   {
@@ -44,7 +56,11 @@ const compassPoints = [
     label: "Duty",
     description:
       "Doing the right thing matters more than how I feel. Guided by: obligation, fairness, virtue, conscience. Morality through: consistency, sacrifice, service.",
-    direction: "N",
+    direction: "N",  },
+  {
+    label: "Placeholder 1",
+    description: "A placeholder for future philosophical direction.",
+    direction: "NNE",
   },
   {
     label: "Ambition",
@@ -132,29 +148,32 @@ export default function AnimatedCompass() {
                   strokeWidth="2"
                 />
               );
-            })}
-          </g>
+            })}          </g>
 
           {/* Philosophy labels inside the compass */}
           {compassPoints.map((point) => {
             // Map direction to angle
             const directionAngles: Record<string, number> = {
               N: 0,
-              NE: 45,
-              E: 90,
-              SE: 135,
-              S: 180,
-              SW: 225,
-              W: 270,
-              NW: 315,
-            };
-            const angle =
+              NNE: 30,
+              NE: 60,
+              ENE: 90,
+              E: 120,
+              ESE: 150,
+              SE: 180,
+              SSE: 210,
+              S: 240,
+              SW: 270,
+              W: 300,
+              NW: 330,
+            };            const angle =
               directionAngles[
                 point.direction as keyof typeof directionAngles
               ] ?? 0;
             
             // Place labels inside the compass at different radii for better spacing
-            const labelRadius = 140;
+            // Faith and Rationality get special positioning closer to edge
+            const labelRadius = (point.label === "Faith" || point.label === "Rationality") ? 160 : 140;
             const labelX = 220 + labelRadius * Math.cos((angle * Math.PI) / 180);
             const labelY = 220 + labelRadius * Math.sin((angle * Math.PI) / 180);
 
@@ -190,26 +209,24 @@ export default function AnimatedCompass() {
                 </text>
               </g>
             );
-          })}
-
-          {/* Compass needle */}
+          })}{/* Compass needle */}
           <g
             transform={`rotate(${rotation ?? 0}, 220, 220)`}
             className={styles.arrow}
             filter="url(#needleShadow)"
           >
             {/* North (red) needle */}
-            <polygon points="220,60 230,220 210,220" fill="#d32f2f" />
+            <polygon points="220,160 225,220 215,220" fill="#d32f2f" />
             {/* South (gray/white) needle */}
-            <polygon points="220,380 230,220 210,220" fill="#b8aa8f" />
+            <polygon points="220,280 225,220 215,220" fill="#b8aa8f" />
             {/* Center circle */}
             <circle
               cx="220"
               cy="220"
-              r="10"
+              r="8"
               fill="#fff"
               stroke="#3e3a33"
-              strokeWidth="3"
+              strokeWidth="2"
             />
           </g>
         </svg>
